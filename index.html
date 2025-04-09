@@ -6,6 +6,7 @@
     <title>Feedback Inteligente EMB</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- Estilos CSS (iguais aos anteriores, com adição para o campo de email) --- */
         :root {
             --primary-color: #0057b8; /* Azul EMB (ajuste se tiver um específico) */
             --secondary-color: #f0f4f8; /* Cinza claro azulado */
@@ -16,120 +17,26 @@
             --border-radius: 8px;
             --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--secondary-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            color: var(--text-color);
-        }
-
-        .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-            max-width: 550px;
-            width: 90%;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        p.intro {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 1.1em;
-        }
-
-        .file-input-wrapper {
-            border: 2px dashed var(--primary-color);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-bottom: 30px;
-            cursor: pointer;
-            background-color: #fdfdfd;
-            transition: background-color 0.2s ease;
-        }
-
-        .file-input-wrapper:hover {
-            background-color: #f1f5ff; /* Azul bem claro no hover */
-        }
-
-        input[type="file"] {
-            /* Esconde o input padrão, mas mantém funcional */
-            opacity: 0;
-            position: absolute;
-            z-index: -1;
-        }
-
-        #fileName {
-            margin-top: 15px;
-            font-style: italic;
-            color: #666;
-        }
-
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: var(--border-radius);
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            width: 100%; /* Botão ocupa largura total */
-        }
-
-        button:hover {
-            background-color: #00418a; /* Azul mais escuro */
-            transform: translateY(-1px);
-        }
-         button:active {
-             transform: translateY(0px);
-         }
-
-        button:disabled {
-            background-color: #a0b3c7;
-            cursor: not-allowed;
-        }
-
-        #message {
-            margin-top: 25px;
-            font-weight: 600;
-            padding: 12px;
-            border-radius: var(--border-radius);
-            display: none; /* Começa escondido */
-        }
-
+        body { font-family: 'Poppins', sans-serif; background-color: var(--secondary-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: var(--text-color); }
+        .container { background-color: white; padding: 40px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); text-align: center; max-width: 550px; width: 90%; }
+        h1 { color: var(--primary-color); font-weight: 700; margin-bottom: 15px; }
+        p.intro { font-size: 1.1em; color: #555; margin-bottom: 30px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-color); font-size: 1.1em; text-align: left; } /* Alinha label à esquerda */
+        .form-group { margin-bottom: 20px; text-align: left; } /* Grupo para label + input */
+        input[type="email"], input[type="file"] { display: block; width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: var(--border-radius); font-size: 1em; margin-top: 5px;}
+        .file-input-wrapper { border: 2px dashed var(--primary-color); border-radius: var(--border-radius); padding: 25px; margin-bottom: 30px; cursor: pointer; background-color: #fdfdfd; transition: background-color 0.2s ease; text-align: center;} /* Centraliza texto dentro do wrapper */
+        .file-input-wrapper:hover { background-color: #f1f5ff; }
+        input[type="file"] { opacity: 0; position: absolute; z-index: -1; width: auto; padding: 0; margin-top: 0; border: none;} /* Esconde o input file real */
+        #fileName { margin-top: 15px; font-style: italic; color: #666; text-align: center; }
+        button { background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: var(--border-radius); font-size: 1.1em; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease; width: 100%; margin-top: 10px; }
+        button:hover { background-color: #00418a; transform: translateY(-1px); }
+        button:active { transform: translateY(0px); }
+        button:disabled { background-color: #a0b3c7; cursor: not-allowed; }
+        #message { margin-top: 25px; font-weight: 600; padding: 12px; border-radius: var(--border-radius); display: none; }
         .success { background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc;}
         .error { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7;}
         .info { background-color: #cff4fc; color: #055160; border: 1px solid #b6effb;}
-
-        /* Estilo para o ícone de upload (opcional) */
-        .upload-icon {
-             font-size: 2em; /* Tamanho do ícone */
-             color: var(--primary-color);
-             margin-bottom: 10px;
-        }
-
+        .upload-icon { font-size: 2em; color: var(--primary-color); margin-bottom: 10px; }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -139,13 +46,22 @@
         <p class="intro">Coloque aqui a transcrição da sua conversa, para receber seu Feedback e seguir evoluindo muito!</p>
 
         <form id="uploadForm">
-            <label for="pdfFile" class="file-input-wrapper">
-                <div class="upload-icon">
-                    <i class="fas fa-cloud-upload-alt"></i> </div>
-                Clique aqui ou arraste seu PDF
-                <input type="file" id="pdfFile" name="arquivo" accept=".pdf" required>
-                <div id="fileName">Nenhum arquivo selecionado</div>
-            </label>
+            <div class="form-group">
+                <label for="userEmail">Seu Email:</label>
+                <input type="email" id="userEmail" name="userEmail" placeholder="seu.email@exemplo.com" required>
+            </div>
+
+             <div class="form-group">
+                <label for="pdfFile" style="text-align: center;">Arquivo PDF da Transcrição:</label>
+                <label for="pdfFile" class="file-input-wrapper">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    Clique aqui ou arraste seu PDF
+                    <input type="file" id="pdfFile" name="arquivo" accept=".pdf" required>
+                    <div id="fileName">Nenhum arquivo selecionado</div>
+                 </label>
+             </div>
 
             <button type="submit" id="submitButton">
                  <i class="fas fa-paper-plane"></i> Enviar para Análise
@@ -161,6 +77,7 @@
         const submitButton = document.getElementById('submitButton');
         const fileInput = document.getElementById('pdfFile');
         const fileNameDiv = document.getElementById('fileName');
+        const emailInput = document.getElementById('userEmail'); // Pega o campo de email
         const fileInputWrapper = document.querySelector('.file-input-wrapper');
 
         // --- URL DE PRODUÇÃO DO SEU WEBHOOK N8N ---
@@ -183,43 +100,48 @@
 
         // Lógica de envio do formulário
         form.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Impede o envio padrão que recarrega a página
+            event.preventDefault(); // Impede o envio padrão
+
+            // Validação simples de email (opcional, mas recomendada)
+            if (!emailInput.value || !emailInput.checkValidity()) {
+                 messageDiv.textContent = 'Por favor, insira um endereço de email válido.';
+                 messageDiv.className = 'error';
+                 messageDiv.style.display = 'block';
+                 emailInput.focus(); // Foca no campo de email
+                 return;
+            }
 
             if (!fileInput.files || fileInput.files.length === 0) {
                 messageDiv.textContent = 'Por favor, selecione um arquivo PDF.';
-                messageDiv.className = 'error'; // Aplica estilo de erro
-                messageDiv.style.display = 'block'; // Mostra a mensagem
+                messageDiv.className = 'error';
+                messageDiv.style.display = 'block';
                 return;
             }
 
             messageDiv.textContent = 'Enviando, por favor aguarde...';
-            messageDiv.className = 'info'; // Aplica estilo de informação
+            messageDiv.className = 'info';
             messageDiv.style.display = 'block';
-            submitButton.disabled = true; // Desabilita o botão durante o envio
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...'; // Feedback visual no botão
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
-            const formData = new FormData(form); // Pega os dados do formulário (inclui o arquivo)
+            const formData = new FormData(form); // Pega email E arquivo
 
             try {
                 // Envia os dados para o Webhook N8N
                 const response = await fetch(webhookUrl, {
                     method: 'POST',
-                    body: formData // O navegador envia como multipart/form-data automaticamente
+                    body: formData
                 });
 
                 // Verifica se a requisição foi recebida com sucesso pelo N8N
                 if (response.ok) {
-                    messageDiv.textContent = 'Arquivo enviado com sucesso! A análise foi iniciada.';
-                    messageDiv.className = 'success'; // Aplica estilo de sucesso
+                    messageDiv.textContent = 'Arquivo enviado com sucesso! A análise foi iniciada. Você receberá o relatório por email quando estiver pronto.';
+                    messageDiv.className = 'success';
                     form.reset(); // Limpa o formulário
-                    fileNameDiv.textContent = 'Nenhum arquivo selecionado'; // Reseta nome do arquivo
+                    fileNameDiv.textContent = 'Nenhum arquivo selecionado';
                 } else {
-                    // Tenta ler uma mensagem de erro se houver
                     let errorMsg = `Erro ${response.status}: ${response.statusText}`;
-                    try {
-                         const errorData = await response.json();
-                         errorMsg = errorData.message || JSON.stringify(errorData);
-                    } catch(e) { /* Ignora se não for JSON */ }
+                    try { const errorData = await response.json(); errorMsg = errorData.message || JSON.stringify(errorData); } catch(e) { /* Ignora */ }
                     messageDiv.textContent = `Erro ao enviar: ${errorMsg}`;
                     messageDiv.className = 'error';
                 }
@@ -228,8 +150,8 @@
                 messageDiv.textContent = 'Erro de rede ao tentar enviar. Verifique sua conexão ou contate o suporte.';
                 messageDiv.className = 'error';
             } finally {
-                submitButton.disabled = false; // Reabilita o botão
-                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar para Análise'; // Restaura texto original
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar para Análise';
             }
         });
     </script>
